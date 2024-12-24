@@ -193,7 +193,8 @@ class _BrnPopupWindowState extends State<BrnPopupWindow> {
   void initState() {
     super.initState();
     this._showRect = _getWidgetGlobalRect(widget.popKey);
-    this._screenSize =PlatformDispatcher.instance.views.first.physicalSize/ PlatformDispatcher.instance.views.first.devicePixelRatio;
+    this._screenSize = PlatformDispatcher.instance.views.first.physicalSize /
+        PlatformDispatcher.instance.views.first.devicePixelRatio;
     _borderColor = (widget.borderColor ?? Colors.transparent).withAlpha(255);
     _backgroundColor =
         (widget.backgroundColor ?? Colors.transparent).withAlpha(255);
@@ -313,7 +314,8 @@ class _BrnPopupWindowState extends State<BrnPopupWindow> {
   // popWindow的弹出样式
   Widget _buildPopWidget(BuildContext context) {
     // 状态栏高度
-    double statusBarHeight = MediaQueryData.fromView(View.of(context)).padding.top;
+    double statusBarHeight =
+        MediaQueryData.fromView(View.of(context)).padding.top;
     return Positioned(
         left: _expandedRight ? _left : null,
         right: _expandedRight ? null : _right,
@@ -486,7 +488,11 @@ class BrnPopupListWindow {
     VoidCallback? onDismiss,
   }) {
     TextStyle textStyle = TextStyle(
-        color: BrnThemeConfigurator.instance.getConfig().commonConfig.colorTextBase, fontSize: 16);
+        color: BrnThemeConfigurator.instance
+            .getConfig()
+            .commonConfig
+            .colorTextBase,
+        fontSize: 16);
     double arrowHeight = 6.0;
     Color borderColor = Color(0xffCCCCCC);
     Color backgroundColor = Colors.white;
@@ -497,8 +503,10 @@ class BrnPopupListWindow {
     double maxHeight = 200;
     double borderRadius = 4;
     bool hasCloseIcon = true;
-    assert(popKey.currentContext != null && popKey.currentContext!.findRenderObject() != null);
-    if (popKey.currentContext == null || popKey.currentContext!.findRenderObject() == null) return;
+    assert(popKey.currentContext != null &&
+        popKey.currentContext!.findRenderObject() != null);
+    if (popKey.currentContext == null ||
+        popKey.currentContext!.findRenderObject() == null) return;
     Navigator.push(
         context,
         BrnPopupRoute(
@@ -512,22 +520,24 @@ class BrnPopupListWindow {
           offset: offset,
           widget: BrunoTools.isEmpty(data)
               ? Container(
-                  constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+                  constraints:
+                      BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
                 )
               : Container(
-                  constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+                  constraints:
+                      BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
                   child: SingleChildScrollView(
                     child: Container(
                       padding: EdgeInsets.only(top: 6, bottom: 6),
                       child: Column(
-                        children:
-                            _getItems(context, minWidth, maxWidth, itemBuilder, textStyle, data!,
-                                (index, item) {
+                        children: _getItems(context, minWidth, maxWidth,
+                            itemBuilder, textStyle, data!, (index, item) {
                           if (onItemClick != null) {
                             bool isIntercept = onItemClick(index, item);
                             if (isIntercept) return;
                           }
-                          Navigator.pop(context, {'index': index, 'item': item});
+                          Navigator.pop(
+                              context, {'index': index, 'item': item});
                         }),
                       ),
                     ),
@@ -559,8 +569,10 @@ class BrnPopupListWindow {
       double? arrowOffset,
       BrnPopupListItemClick? onItemClick,
       VoidCallback? onDismiss}) {
-    assert(popKey.currentContext != null && popKey.currentContext!.findRenderObject() != null);
-    if (popKey.currentContext == null || popKey.currentContext!.findRenderObject() == null) return;
+    assert(popKey.currentContext != null &&
+        popKey.currentContext!.findRenderObject() != null);
+    if (popKey.currentContext == null ||
+        popKey.currentContext!.findRenderObject() == null) return;
 
     double arrowHeight = 6.0;
     double borderRadius = 4;
@@ -568,10 +580,10 @@ class BrnPopupListWindow {
     double minWidth = 100;
     double maxWidth = 150;
     double maxHeight = 200;
-    Color borderColor = BrnThemeConfigurator.instance.getConfig().commonConfig.dividerColorBase;
-    Color backgroundColor = Colors.white;
-    TextStyle textStyle = TextStyle(
-        color: BrnThemeConfigurator.instance.getConfig().commonConfig.colorTextBase, fontSize: 14);
+    Color borderColor =
+        BrnThemeConfigurator.instance.getConfig().commonConfig.dividerColorBase;
+    Color backgroundColor = const Color(0xFF1A1A1A);
+    TextStyle textStyle = TextStyle(color: Colors.white, fontSize: 14);
     bool hasCloseIcon = true;
 
     Navigator.push(
@@ -588,15 +600,18 @@ class BrnPopupListWindow {
           offset: offset,
           widget: BrunoTools.isEmpty(data)
               ? Container(
-                  constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+                  constraints:
+                      BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
                 )
               : Container(
-                  constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+                  constraints:
+                      BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
                   child: SingleChildScrollView(
                     child: Container(
                       padding: EdgeInsets.only(top: 6, bottom: 6),
                       child: Column(
-                        children: _getItems(context, minWidth, maxWidth, null, textStyle, data!,
+                        children: _getItems(
+                            context, minWidth, maxWidth, null, textStyle, data!,
                             (index, item) {
                           if (onItemClick != null) {
                             bool isIntercept = onItemClick(index, item);
@@ -646,7 +661,7 @@ class BrnPopupListWindow {
               width: textMaxWidth,
               alignment: Alignment.center,
               color: Colors.transparent,
-              padding: EdgeInsets.only(left: 26, right: 26, top: 6, bottom: 6),
+              padding: EdgeInsets.all(6),
               child: _getTextWidget(itemBuilder, data, f, textStyle)));
     }).toList();
   }

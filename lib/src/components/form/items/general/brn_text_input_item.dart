@@ -75,6 +75,8 @@ class BrnTextInputFormItem extends StatefulWidget {
   /// 单位
   final String? unit;
 
+  final Widget? unitWidget;
+
   /// 输入内容类型
   final String? inputType;
 
@@ -116,8 +118,9 @@ class BrnTextInputFormItem extends StatefulWidget {
     this.prefixText,
     this.hint,
     this.unit,
+    this.unitWidget,
     this.maxCharCount,
-    this.autofocus= false,
+    this.autofocus = false,
     this.inputType,
     this.inputFormatters,
     this.onChanged,
@@ -130,8 +133,9 @@ class BrnTextInputFormItem extends StatefulWidget {
         .getConfig(configId: this.themeData!.configId)
         .formItemConfig
         .merge(this.themeData);
-    this.themeData = this.themeData!.merge(
-        BrnFormItemConfig(backgroundColor: backgroundColor));
+    this.themeData = this
+        .themeData!
+        .merge(BrnFormItemConfig(backgroundColor: backgroundColor));
   }
 
   @override
@@ -208,7 +212,8 @@ class BrnTextInputFormItemState extends State<BrnTextInputFormItem> {
                       border: InputBorder.none,
                       hintStyle:
                           BrnFormUtil.getHintTextStyle(widget.themeData!),
-                      hintText: widget.hint?? BrnIntl.of(context).localizedResource.pleaseEnter,
+                      hintText: widget.hint ??
+                          BrnIntl.of(context).localizedResource.pleaseEnter,
                       counterText: "",
                       contentPadding: EdgeInsets.all(0),
                       isDense: true,
@@ -236,6 +241,12 @@ class BrnTextInputFormItemState extends State<BrnTextInputFormItem> {
                           fontSize: BrnFonts.f16,
                         ),
                       )),
+                ),
+                Offstage(
+                  offstage: (widget.unitWidget == null),
+                  child: Container(
+                      padding: EdgeInsets.only(left: 10),
+                      child: widget.unitWidget),
                 ),
               ],
             ),

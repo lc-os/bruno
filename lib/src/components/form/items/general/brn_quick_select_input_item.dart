@@ -401,7 +401,7 @@ class QuickButtonsState extends State<QuickButtonsWidget> {
     if (widget.selectBtnList != null &&
         index < widget.selectBtnList!.length &&
         widget.selectBtnList![index]) {
-      return Color(0x1F0984F9);
+      return Color(0xFFF36C21).withOpacity(0.15);
     } else {
       return Color(0xFFF8F8F8);
     }
@@ -427,7 +427,7 @@ class QuickButtonsState extends State<QuickButtonsWidget> {
     if (widget.selectBtnList != null &&
         index < widget.selectBtnList!.length &&
         widget.selectBtnList![index]) {
-      return Color(0xFF0984F9);
+      return Color(0xFFF36C21);
     } else {
       return Color(0xFF222222);
     }

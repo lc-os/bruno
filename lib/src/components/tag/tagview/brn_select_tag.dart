@@ -191,10 +191,19 @@ class _BrnSelectTagState extends State<BrnSelectTag> {
 
   Widget _tagWidgetAtIndex(int nameIndex) {
     bool selected = _tagState[nameIndex];
-    Text tx = Text(
-      widget.tags[nameIndex],
-      style: selected ? _selectedTextStyle() : _tagTextStyle(),
-      overflow: TextOverflow.ellipsis,
+    Widget tx = Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Icon(
+            selected ? Icons.check_box_outlined : Icons.check_box_outline_blank,
+            color:
+                selected ? _selectedTextStyle().color : _tagTextStyle().color),
+        Text(
+          widget.tags[nameIndex],
+          style: selected ? _selectedTextStyle() : _tagTextStyle(),
+          overflow: TextOverflow.ellipsis,
+        )
+      ],
     );
     Container container = Container(
       constraints: BoxConstraints(minWidth: widget.themeData!.tagMinWidth),
